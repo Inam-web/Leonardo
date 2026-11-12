@@ -10,11 +10,11 @@ if (!databaseUrl) {
 const globalForDb = globalThis;
 
 export const pool =
-  globalForDb.__leonardoPiccardiPostgresqlPool ||
+  globalForDb.__leonardoPiccardiPool ||
   new Pool({ connectionString: databaseUrl });
 
 if (process.env.NODE_ENV !== "production") {
-  globalForDb.__leonardoPiccardiPostgresqlPool = pool;
+  globalForDb.__leonardoPiccardiPool = pool;
 }
 
 export const db = drizzle(pool);
