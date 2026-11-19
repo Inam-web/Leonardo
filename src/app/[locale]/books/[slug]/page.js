@@ -1,6 +1,7 @@
 import Link from "next/link";
 import BookCover from "@/components/BookCover";
 import { PurchaseLink } from "@/components/PurchaseLink";
+import ScrollReveal from "@/components/ScrollReveal";
 import { books, getBookBySlug } from "@/data/books";
 import { getCopy } from "@/data/locales";
 import { notFound } from "next/navigation";
@@ -50,7 +51,7 @@ export default async function BookDetailPage({ params }) {
     <div className="book-detail-page">
       <section className="book-detail-hero interior-intro--dark">
         <div className="page-shell book-detail-hero__layout">
-          <div className="book-detail-hero__copy">
+          <ScrollReveal className="book-detail-hero__copy">
             <nav className="breadcrumbs" aria-label="Breadcrumb">
               <Link href={`/${locale}/books`}>{copy.nav.books}</Link>
               <span aria-hidden="true">/</span>
@@ -67,21 +68,21 @@ export default async function BookDetailPage({ params }) {
                 <span>{copy.bookPage.back}</span><span className="text-link__arrow" aria-hidden="true">←</span>
               </Link>
             </div>
-          </div>
-          <div className="book-detail-hero__art">
-            <BookCover book={book} locale={locale} className="cover-figure--detail" priority caption={copy.featured.coverCaption} />
-          </div>
+          </ScrollReveal>
+          <ScrollReveal delay={0.15} className="book-detail-hero__art">
+            <BookCover book={book} locale={locale} className="cover-figure--detail" priority caption={copy.featured.coverCaption} clickable={false} />
+          </ScrollReveal>
         </div>
       </section>
 
       <section className="book-synopsis-section paper-texture">
         <div className="page-shell synopsis-layout">
-          <aside className="synopsis-aside">
+          <ScrollReveal className="synopsis-aside">
             <p className="eyebrow">{copy.bookPage.synopsis}</p>
             <span className="synopsis-aside__line" aria-hidden="true" />
             <p>{copy.bookPage.listedFor}</p>
-          </aside>
-          <article className="synopsis-copy">
+          </ScrollReveal>
+          <ScrollReveal delay={0.15} as="article" className="synopsis-copy">
             <h2 className="display-title section-title">{copy.bookPage.synopsis}</h2>
             {story.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             <dl className="book-facts book-facts--detail">
@@ -95,20 +96,22 @@ export default async function BookDetailPage({ params }) {
               </div>
             </dl>
             <p className="source-note">{copy.bookPage.source}</p>
-          </article>
+          </ScrollReveal>
         </div>
       </section>
 
       <section className="series-note-section">
         <div className="page-shell series-note-layout">
-          <div>
-            <p className="eyebrow eyebrow--gold">{book.series}</p>
-            <h2 className="display-title section-title">{copy.bookPage.nextTitle}</h2>
-          </div>
-          <div className="series-note-copy">
+          <ScrollReveal>
+            <div>
+              <p className="eyebrow eyebrow--gold">{book.series}</p>
+              <h2 className="display-title section-title">{copy.bookPage.nextTitle}</h2>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={0.15} className="series-note-copy">
             <p>{copy.bookPage.nextBody}</p>
             <PurchaseLink book={book} label={copy.bookPage.buy} className="button button--gold" />
-          </div>
+          </ScrollReveal>
         </div>
       </section>
     </div>

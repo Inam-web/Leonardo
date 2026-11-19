@@ -1,7 +1,7 @@
 export const author = {
   name: "Leonardo Piccardi",
-  portraitImage: null,
-  portraitAssetPath: "public/images/leonardo-piccardi.jpg",
+  portraitImage: "/images/leonardo-piccardi.jpeg",
+  portraitAssetPath: "public/images/leonardo-piccardi.jpeg",
   contact: {
     email: "leonardopic@libero.it",
     phone: "3456102446",

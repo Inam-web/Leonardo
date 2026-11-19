@@ -1,6 +1,7 @@
 import Link from "next/link";
 import BookCover from "@/components/BookCover";
 import { PurchaseLink, TextLink } from "@/components/PurchaseLink";
+import ScrollReveal from "@/components/ScrollReveal";
 import { books } from "@/data/books";
 import { getCopy } from "@/data/locales";
 
@@ -26,24 +27,31 @@ export default async function BooksPage({ params }) {
     <div className="collection-page">
       <section className="interior-intro interior-intro--dark">
         <div className="page-shell interior-intro__inner">
-          <p className="eyebrow eyebrow--gold">{copy.collection.eyebrow}</p>
-          <h1 className="display-title interior-title">
-            <span>{copy.collection.title[0]}</span>
-            <em>{copy.collection.title[1]}</em>
-          </h1>
-          <p className="interior-intro__lead">{copy.collection.intro}</p>
+          <ScrollReveal>
+            <p className="eyebrow eyebrow--gold">{copy.collection.eyebrow}</p>
+            <h1 className="display-title interior-title">
+              <span>{copy.collection.title[0]}</span>
+              <em>{copy.collection.title[1]}</em>
+            </h1>
+            <p className="interior-intro__lead">{copy.collection.intro}</p>
+          </ScrollReveal>
         </div>
       </section>
 
       <section className="book-catalog paper-texture" aria-label={copy.collection.current}>
         <div className="page-shell">
-          <div className="section-ruler">
+          <ScrollReveal className="section-ruler">
             <span className="eyebrow">{copy.collection.current}</span>
             <span className="section-ruler__note">{String(books.length).padStart(2, "0")}</span>
-          </div>
+          </ScrollReveal>
           <div className="catalog-list">
             {books.map((book, index) => (
-              <article className="catalog-entry" key={book.slug}>
+              <ScrollReveal 
+                as="article" 
+                className="catalog-entry" 
+                key={book.slug}
+                delay={index * 0.1}
+              >
                 <div className="catalog-entry__number">{String(index + 1).padStart(2, "0")}</div>
                 <div className="catalog-entry__art">
                   <BookCover book={book} locale={locale} className="cover-figure--catalog" />
@@ -62,11 +70,13 @@ export default async function BooksPage({ params }) {
                     <PurchaseLink book={book} label={copy.collection.buy} className="button button--dark" />
                   </div>
                 </div>
-              </article>
+              </ScrollReveal>
             ))}
           </div>
-          <p className="catalog-note">{copy.collection.note}</p>
-          <Link className="back-link" href={`/${locale}`}>← {copy.nav.home}</Link>
+          <ScrollReveal delay={0.2}>
+            <p className="catalog-note">{copy.collection.note}</p>
+            <Link className="back-link" href={`/${locale}`}>← {copy.nav.home}</Link>
+          </ScrollReveal>
         </div>
       </section>
     </div>

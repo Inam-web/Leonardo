@@ -1,7 +1,9 @@
 import Link from "next/link";
 import BookCover from "@/components/BookCover";
+import StoryBeat from "@/components/StoryBeat";
 import { PurchaseLink, TextLink } from "@/components/PurchaseLink";
 import AuthorPortrait from "@/components/AuthorPortrait";
+import ScrollReveal from "@/components/ScrollReveal";
 import { author } from "@/data/author";
 import { books } from "@/data/books";
 import { getCopy, supportedLocales } from "@/data/locales";
@@ -40,6 +42,7 @@ export default async function HomePage({ params }) {
 
   return (
     <div className="home-page">
+      {/* HERO SECTION */}
       <section className="hero-section" id="home">
         <div className="hero-starfield" aria-hidden="true" />
         <div className="page-shell hero-layout">
@@ -80,17 +83,20 @@ export default async function HomePage({ params }) {
         </div>
       </section>
 
+      {/* FEATURED SECTION */}
       <section className="featured-section paper-texture" id="featured">
         <div className="page-shell">
-          <div className="section-ruler">
+          <ScrollReveal className="section-ruler">
             <span className="eyebrow"><span>{copy.featured.number}</span> {copy.featured.kicker}</span>
             <span className="section-ruler__note">{copy.featured.topNote}</span>
-          </div>
+          </ScrollReveal>
+          
           <div className="featured-layout" id="books">
-            <div className="featured-art">
+            <ScrollReveal delay={0.1} className="featured-art">
               <BookCover book={book} locale={locale} className="cover-figure--featured" caption={copy.featured.coverCaption} />
-            </div>
-            <div className="featured-copy">
+            </ScrollReveal>
+            
+            <ScrollReveal delay={0.2} className="featured-copy">
               <p className="eyebrow featured-label">{copy.featured.titleLabel}</p>
               <h2 className="display-title section-title featured-title">
                 <span>{copy.featured.titleLead}</span>
@@ -112,41 +118,48 @@ export default async function HomePage({ params }) {
                 <PurchaseLink book={book} label={copy.featured.buy} className="button button--dark" />
                 <TextLink href={`/${locale}/books/${book.slug}`}>{copy.featured.read}</TextLink>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
+      {/* JOURNEY SECTION */}
       <section className="journey-section" aria-labelledby="journey-title">
         <div className="page-shell">
-          <div className="journey-heading">
-            <p className="eyebrow">{copy.journey.eyebrow}</p>
-            <h2 className="display-title section-title" id="journey-title">
-              <span>{copy.journey.title[0]}</span>
-              <em>{copy.journey.title[1]}</em>
-            </h2>
-          </div>
-          <ol className="story-beats">
+          
+          {/* FIXED WRAPPER HERE */}
+          <ScrollReveal>
+            <div className="journey-heading">
+              <p className="eyebrow">{copy.journey.eyebrow}</p>
+              <h2 className="display-title section-title" id="journey-title">
+                <span>{copy.journey.title[0]}</span>
+                <em>{copy.journey.title[1]}</em>
+              </h2>
+            </div>
+          </ScrollReveal>
+          
+          <div className="story-beats">
             {copy.journey.steps.map((step, index) => (
-              <li className="story-beat" key={step.title}>
-                <span className="story-beat__number">{String(index + 1).padStart(2, "0")}</span>
-                <div className="story-beat__copy">
-                  <h3>{step.title}</h3>
-                  <p>{step.body}</p>
-                </div>
-                <span className="story-beat__arrow" aria-hidden="true">↗</span>
-              </li>
+              <ScrollReveal 
+                key={step.title} 
+                delay={index * 0.1}
+              >
+                <StoryBeat step={step} index={index} />
+              </ScrollReveal>
             ))}
-          </ol>
+          </div>
+
         </div>
       </section>
 
+      {/* ABOUT PREVIEW SECTION */}
       <section className="about-preview-section" id="about">
         <div className="page-shell about-preview-layout">
-          <div className="about-preview-art">
-            <AuthorPortrait label={copy.aboutPreview.portrait} path={copy.aboutPreview.portraitPath} />
-          </div>
-          <div className="about-preview-copy">
+          <ScrollReveal delay={0.1} className="about-preview-art">
+            <AuthorPortrait src={author.portraitImage} alt={author.name} />
+          </ScrollReveal>
+          
+          <ScrollReveal delay={0.2} className="about-preview-copy">
             <p className="eyebrow">{copy.aboutPreview.eyebrow}</p>
             <h2 className="display-title section-title">
               <span>{copy.aboutPreview.title[0]}</span>
@@ -155,14 +168,15 @@ export default async function HomePage({ params }) {
             <p className="about-preview-note">{copy.aboutPreview.note}</p>
             <p className="about-preview-summary">{authorSummary}</p>
             <TextLink href={`/${locale}/about`}>{copy.aboutPreview.link}</TextLink>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
+      {/* CONTACT PREVIEW SECTION */}
       <section className="contact-preview-section">
         <div className="contact-preview-orbit" aria-hidden="true" />
         <div className="page-shell contact-preview-layout">
-          <div className="contact-preview-copy">
+          <ScrollReveal className="contact-preview-copy">
             <p className="eyebrow eyebrow--gold">{copy.contactPreview.eyebrow}</p>
             <h2 className="display-title section-title">
               <span>{copy.contactPreview.title[0]}</span>
@@ -170,10 +184,13 @@ export default async function HomePage({ params }) {
             </h2>
             <p>{copy.contactPreview.body}</p>
             <a className="contact-preview-email" href={`mailto:${author.contact.email}`}>{author.contact.email}</a>
-          </div>
-          <Link className="contact-preview-link" href={`/${locale}/contact`}>
-            <span>{copy.contactPreview.link}</span><span aria-hidden="true">↗</span>
-          </Link>
+          </ScrollReveal>
+          
+          <ScrollReveal delay={0.15}>
+            <Link className="contact-preview-link" href={`/${locale}/contact`}>
+              <span>{copy.contactPreview.link}</span><span aria-hidden="true">↗</span>
+            </Link>
+          </ScrollReveal>
         </div>
       </section>
     </div>

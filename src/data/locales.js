@@ -50,21 +50,24 @@ const copy = {
       read: "Read the full story",
       coverCaption: "Official cover artwork",
     },
-    journey: {
+        journey: {
       eyebrow: "The journey / A glimpse of the adventure",
       title: ["A small discovery.", "A galaxy of possibility."],
       steps: [
         {
           title: "A light in the woods",
           body: "During a summer holiday, Argo discovers a mysterious glowing stone among the trees.",
+          expanded: "What begins as a simple game of fetch quickly turns into something extraordinary. The stone pulses with an unknown energy, leading the children and their eccentric Grandpa Felice to realize they aren't just dealing with a simple rock—but a key to the cosmos.",
         },
         {
           title: "Visitors from another world",
           body: "Puck and Liara arrive with a magical artifact—and a world in danger.",
+          expanded: "These aren't just visitors; they are refugees from a distant planet. Their queen has been kidnapped by dark forces, and the glowing stone is the only thing that can power their ship. Suddenly, the family is thrust into an interstellar conflict they never could have imagined.",
         },
         {
           title: "A voyage into the unknown",
           body: "Grandpa Felice, Michi, and Gaia travel through the galaxy, where courage and kindness matter most.",
+          expanded: "Navigating through meteor storms and invisible spacecraft, the crew learns that the greatest weapon isn't the magical stone, but their unbreakable bond. Alongside their new alien friends, they must face the darkness and prove that hope can shine brighter than any star.",
         },
       ],
     },

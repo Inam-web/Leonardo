@@ -1,5 +1,6 @@
 import { author } from "@/data/author";
 import { getCopy } from "@/data/locales";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const openGraphLocales = { en: "en_US", it: "it_IT", es: "es_ES", de: "de_DE" };
 
@@ -20,31 +21,38 @@ export default async function ContactPage({ params }) {
   const { locale } = await params;
   const copy = getCopy(locale);
   const addressLines = author.contact.address.split(", ");
+  
+  const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${author.contact.email}&su=Website%20Enquiry`;
 
   return (
     <div className="contact-page">
       <section className="interior-intro interior-intro--dark contact-intro">
         <div className="page-shell interior-intro__inner">
-          <p className="eyebrow eyebrow--gold">{copy.contactPage.eyebrow}</p>
-          <h1 className="display-title interior-title">
-            <span>{copy.contactPage.title[0]}</span>
-            <em>{copy.contactPage.title[1]}</em>
-          </h1>
-          <p className="interior-intro__lead">{copy.contactPage.lead}</p>
+          <ScrollReveal>
+            <p className="eyebrow eyebrow--gold">{copy.contactPage.eyebrow}</p>
+            <h1 className="display-title interior-title">
+              <span>{copy.contactPage.title[0]}</span>
+              <em>{copy.contactPage.title[1]}</em>
+            </h1>
+            <p className="interior-intro__lead">{copy.contactPage.lead}</p>
+          </ScrollReveal>
         </div>
       </section>
 
       <section className="contact-details-section paper-texture">
         <div className="page-shell contact-details-layout">
-          <div className="contact-email-block">
+          <ScrollReveal className="contact-email-block">
             <p className="eyebrow">{copy.contactPage.email}</p>
-            <a className="contact-email-large" href={`mailto:${author.contact.email}`}>{author.contact.email}</a>
-            <a className="button button--dark" href={`mailto:${author.contact.email}?subject=${encodeURIComponent("Leonardo Piccardi — website enquiry")}`}>
-              <span>{copy.contactPage.emailAction}</span><span className="button-arrow" aria-hidden="true">↗</span>
+            <a className="contact-email-large" href={gmailLink} target="_blank" rel="noopener noreferrer">
+              {author.contact.email}
             </a>
-          </div>
+            <a className="button button--dark" href={gmailLink} target="_blank" rel="noopener noreferrer">
+              <span>{copy.contactPage.emailAction}</span>
+              <span className="button-arrow" aria-hidden="true">↗</span>
+            </a>
+          </ScrollReveal>
 
-          <div className="contact-detail-list">
+          <ScrollReveal delay={0.15} className="contact-detail-list">
             <section className="contact-detail">
               <p className="eyebrow">{copy.contactPage.phone}</p>
               <a href={`tel:${author.contact.phone}`}>{author.contact.phoneDisplay}</a>
@@ -57,18 +65,20 @@ export default async function ContactPage({ params }) {
               <address>{addressLines.map((line) => <span key={line}>{line}</span>)}</address>
             </section>
             <p className="contact-note">{copy.contactPage.note}</p>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
       <section className="contact-closing-section">
         <div className="contact-closing-orbit" aria-hidden="true" />
         <div className="page-shell contact-closing-inner">
-          <p className="eyebrow eyebrow--gold">Leonardo Piccardi</p>
-          <p className="display-title contact-closing-title">{copy.footer.tagline}</p>
-          <a className="text-link text-link--light" href={`mailto:${author.contact.email}`}>
-            <span>{author.contact.email}</span><span className="text-link__arrow" aria-hidden="true">↗</span>
-          </a>
+          <ScrollReveal>
+            <p className="eyebrow eyebrow--gold">Leonardo Piccardi</p>
+            <p className="display-title contact-closing-title">{copy.footer.tagline}</p>
+            <a className="text-link text-link--light" href={gmailLink} target="_blank" rel="noopener noreferrer">
+              <span>{author.contact.email}</span><span className="text-link__arrow" aria-hidden="true">↗</span>
+            </a>
+          </ScrollReveal>
         </div>
       </section>
     </div>

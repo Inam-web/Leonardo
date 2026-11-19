@@ -26,6 +26,7 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 92px;
   background: var(--paper);
+  overflow-x: hidden; /* ADD THIS */
 }
 
 body {
@@ -37,6 +38,7 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: clip; /* ADD THIS */
 }
 
 ::selection {
@@ -68,6 +70,25 @@ summary:focus-visible {
 
 address {
   font-style: normal;
+}
+
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optional: If you ever want text to fade in from the left instead */
+.scroll-reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: 
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.scroll-reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .page-shell {
@@ -151,6 +172,21 @@ address {
   color: #f5f0e4;
   background: rgba(15, 24, 20, 0.98);
   border-bottom: 1px solid rgba(228, 220, 200, 0.13);
+
+   /* ADD THESE 3 LINES */
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, backdrop-filter 0.3s ease;
+  will-change: transform;
+  backdrop-filter: blur(0px);
+}
+
+.site-header.is-scrolled {
+  background: #0f1814; /* Fully solid dark forest green */
+  border-bottom: 1px solid rgba(228, 220, 200, 0.13);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Adds a subtle shadow so it stands out from the text */
+}
+
+.site-header.is-hidden {
+  transform: translateY(-100%); /* Smoothly slides the header up out of view */
 }
 
 .site-header__inner {
@@ -282,6 +318,19 @@ address {
 }
 
 .language-menu summary::-webkit-details-marker,
+/* Add this right above .mobile-menu */
+.mobile-header-actions {
+  display: none; /* Hidden on desktop */
+  align-items: center;
+  gap: 18px;
+}
+
+.mobile-menu {
+  display: none;
+  position: relative;
+  color: #f5f0e4;
+}
+
 .mobile-menu summary::-webkit-details-marker {
   display: none;
 }
@@ -413,7 +462,9 @@ address {
 }
 
 .button--dark:hover {
-  background: #27352e;
+  background: var(--gold); /* Turns the background gold */
+  color: var(--forest);    /* Changes the text to dark green so it's readable */
+  border-color: var(--gold); 
 }
 
 .text-link {
@@ -597,8 +648,9 @@ address {
 
 .hero-art__note {
   position: absolute;
+  z-index: 10; /* Brings it to the front */
   top: 6%;
-  right: -1%;
+  right: -10%; /* Pushes it further to the right so it's not hidden */
   width: 135px;
   margin: 0;
   color: #d6c9a9;
@@ -612,8 +664,9 @@ address {
 
 .hero-art__index {
   position: absolute;
+  z-index: 10; /* Brings it to the front */
   bottom: 5%;
-  left: 1%;
+  left: -10%; /* Pushes it further to the left so it's not hidden */
   display: flex;
   align-items: center;
   gap: 12px;
@@ -861,6 +914,29 @@ address {
   background-image: repeating-linear-gradient(135deg, transparent 0 17px, rgba(72, 71, 58, 0.055) 17px 18px);
 }
 
+.portrait-placeholder {
+  position: relative;
+  display: grid;
+  min-height: 390px;
+  overflow: hidden;
+  place-items: center;
+  aspect-ratio: 0.82;
+  border: 1px solid #c3baa7;
+  background-color: #ddd7c9;
+  background-image: repeating-linear-gradient(135deg, transparent 0 17px, rgba(72, 71, 58, 0.055) 17px 18px);
+}
+
+/* --- ADD THIS NEW BLOCK HERE --- */
+.portrait-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+/* ------------------------------- */
+
 .portrait-placeholder::before {
   position: absolute;
   inset: 11px;
@@ -1035,7 +1111,6 @@ address {
   gap: 26px;
   margin-top: 23px;
 }
-
 /* Story beats */
 .journey-section {
   padding: 105px 0 111px;
@@ -1047,6 +1122,7 @@ address {
   align-items: start;
   grid-template-columns: minmax(180px, 0.6fr) minmax(0, 1.4fr);
   gap: 50px;
+  margin-bottom: 40px; /* This prevents the overlap */
 }
 
 .journey-heading > .eyebrow {
@@ -1063,25 +1139,40 @@ address {
 }
 
 .story-beats {
-  margin: 71px 0 0;
+  margin: 0;
   padding: 0;
   border-top: 1px solid rgba(44, 43, 36, 0.24);
   list-style: none;
 }
 
+.story-beat-wrapper {
+  cursor: pointer;
+  border-bottom: 1px solid rgba(44, 43, 36, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.story-beat-wrapper:hover {
+  background-color: rgba(44, 43, 36, 0.04); /* The subtle hover tint */
+}
+
+.story-beat-wrapper:hover .story-beat__arrow {
+  color: var(--gold-deep);
+}
+
 .story-beat {
   display: grid;
-  align-items: center;
+  align-items: start;
   grid-template-columns: 68px 1fr 32px;
   gap: 21px;
-  min-height: 107px;
-  border-bottom: 1px solid rgba(44, 43, 36, 0.2);
+  padding: 25px 0;
+  min-height: 90px;
 }
 
 .story-beat__number {
   color: #998d71;
   font-family: var(--serif);
   font-size: 19px;
+  padding-top: 2px;
 }
 
 .story-beat__copy h3 {
@@ -1092,20 +1183,30 @@ address {
   font-weight: 400;
   letter-spacing: -0.035em;
   line-height: 1.2;
+  transition: color 0.3s ease;
 }
 
-.story-beat__copy p {
-  margin: 8px 0 0;
+.story-beat-wrapper:hover .story-beat__copy h3 {
+  color: var(--gold-deep);
+}
+
+.story-beat__body {
+  margin: 12px 0 0;
   color: #68665b;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.7;
+  max-width: 90%;
 }
 
 .story-beat__arrow {
+  display: inline-block;
   color: #9a8c6e;
-  font-size: 15px;
+  font-size: 18px;
+  margin-top: 4px;
+  transition: color 0.3s ease;
 }
 
+/* Author preview and contact close */
 /* Author preview and contact close */
 .about-preview-section {
   padding: 108px 0 116px;
@@ -1877,16 +1978,22 @@ address {
   .brand__name { font-size: 15px; }
   .header-cta { padding-inline: 12px; gap: 12px; font-size: 8px; }
   .site-header__actions { gap: 8px; }
-  .hero-layout { grid-template-columns: minmax(0, 1.1fr) minmax(305px, 0.9fr); gap: 37px; }
   .hero-title { font-size: clamp(4rem, 7.2vw, 6.8rem); }
   .featured-layout { gap: 70px; padding-inline: 2%; }
   .about-preview-layout { gap: 70px; padding-inline: 3%; }
+
+  /* HIDES THE OVERLAPPING TEXT ON TABLETS/SMALL LAPTOPS */
+  .hero-art__note, 
+  .hero-art__index { 
+    display: none; 
+  }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1080px) {
   .site-header { height: 72px; }
   .desktop-nav,
   .site-header__actions { display: none; }
+  .mobile-header-actions { display: flex; } /* Shows the mobile actions */
   .mobile-menu { display: block; }
   .mobile-menu__panel {
     position: fixed;
@@ -1922,7 +2029,7 @@ address {
   .hero-layout { min-height: 480px; grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr); }
   .hero-title { font-size: clamp(3.8rem, 7.6vw, 6rem); }
   .hero-art { min-height: 440px; }
-  .hero-art__note { right: -4%; }
+  .hero-art__note { right: -8%; }
   .featured-layout { gap: 46px; }
   .featured-art { min-height: 440px; }
   .featured-title { font-size: clamp(3.3rem, 5.6vw, 4.8rem); }
@@ -1943,8 +2050,10 @@ address {
   .brand__name { font-size: 14px; }
   .mobile-menu summary { gap: 8px; font-size: 8px; }
   .mobile-menu__panel { top: 68px; padding-inline: 21px; }
-  .hero-section { min-height: 0; padding: 52px 0 18px; }
-  .hero-layout { min-height: 0; grid-template-columns: 1fr; gap: 18px; }
+  
+  /* --- HERO SECTION MOBILE FIXES --- */
+  .hero-section { min-height: 0; padding: 45px 0 30px; }
+  .hero-layout { min-height: 0; grid-template-columns: 1fr; gap: 25px; }
   .hero-copy { padding: 0; }
   .hero-eyebrow { margin-bottom: 23px; }
   .hero-title { max-width: 610px; font-size: clamp(3.3rem, 12vw, 5.5rem); line-height: 0.93; }
@@ -1954,16 +2063,22 @@ address {
   .hero-actions { gap: 18px; margin-top: 22px; }
   .button { min-height: 47px; gap: 16px; padding-inline: 15px; font-size: 8px; }
   .hero-discover { gap: 7px; font-size: 8px; }
-  .hero-art { min-height: 385px; margin-top: 1px; }
+  
+  .hero-art { min-height: 385px; margin-top: 35px; } /* Added more space above the book */
   .hero-art::before { width: min(96vw, 430px); }
   .hero-art::after { width: min(76vw, 335px); }
   .cover-figure--hero .book-object { width: clamp(210px, 58vw, 278px); }
-  .hero-art__note { top: 5%; right: 0; width: 105px; font-size: 7px; }
-  .hero-art__index { bottom: 2%; left: 0; font-size: 7px; }
-  .index-seal { width: 32px; height: 32px; font-size: 11px; }
+  
+  /* --- HIDING THE OVERLAPPING TEXT ON MOBILE --- */
+  .hero-art__note { display: none; } 
+  .hero-art__index { display: none; }
+  
   .cover-figure--hero .cover-caption { margin-top: 14px; font-size: 7px; }
-  .hero-footnote { margin-top: 13px; padding-top: 12px; font-size: 6px; letter-spacing: 0.12em; }
+  .hero-footnote { margin-top: 20px; padding-top: 12px; font-size: 6px; letter-spacing: 0.12em; justify-content: center; }
+  .hero-footnote span:first-child { display: none; } /* Hides the bottom left note on mobile for cleanliness */
   .hero-footnote a { gap: 6px; font-size: 6px; }
+
+  /* The rest of your mobile CSS below here stays the same */
   .featured-section { padding: 57px 0 70px; }
   .section-ruler { align-items: flex-start; gap: 15px; padding-bottom: 13px; }
   .section-ruler .eyebrow { gap: 7px; font-size: 7px; letter-spacing: 0.14em; }
@@ -1986,12 +2101,16 @@ address {
   .journey-heading { grid-template-columns: 1fr; gap: 20px; }
   .journey-heading > .eyebrow { padding-top: 0; }
   .journey-heading .section-title { font-size: clamp(3.2rem, 10vw, 4.8rem); }
-  .story-beats { margin-top: 40px; }
-  .story-beat { min-height: 100px; grid-template-columns: 38px 1fr 18px; gap: 13px; }
-  .story-beat__number { font-size: 15px; }
-  .story-beat__copy h3 { font-size: 22px; }
-  .story-beat__copy p { margin-top: 5px; font-size: 11px; }
-  .story-beat__arrow { font-size: 12px; }
+    .story-beat { 
+    grid-template-columns: 38px 1fr 24px; 
+    gap: 13px; 
+    padding: 20px 0;
+    min-height: auto; 
+  }
+  .story-beat__body {
+    font-size: 12px;
+    max-width: 100%;
+  }
   .about-preview-section { padding: 72px 0 75px; }
   .about-preview-layout { grid-template-columns: 1fr; gap: 39px; padding: 0; }
   .about-preview-art { width: min(76%, 315px); margin-inline: auto; }
@@ -2099,5 +2218,49 @@ address {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+
+
+
+/* --- Designer Credit Footer --- */
+.site-footer__credit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(236, 229, 209, 0.06); /* Extremely subtle divider */
+  color: rgba(244, 237, 218, 0.4);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.site-footer__credit-name {
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 15px;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  transition: color 180ms ease, text-shadow 180ms ease;
+}
+
+.site-footer__credit-name:hover {
+  color: #fff3cf;
+  text-shadow: 0 0 12px rgba(217, 199, 155, 0.4);
+}
+
+/* Adjust for small mobile screens so it looks perfect */
+@media (max-width: 680px) {
+  .site-footer__credit {
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 20px;
+    padding-top: 20px;
   }
 }

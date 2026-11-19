@@ -22,7 +22,14 @@ export default function SiteFooter({ locale }) {
               <span className="brand__name">Leonardo Piccardi</span>
             </Link>
             <p>{copy.footer.tagline}</p>
-            <a className="footer-email" href={`mailto:${author.contact.email}`}>{author.contact.email}</a>
+            <a
+              className="footer-email"
+              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${author.contact.email}&su=Website%20Enquiry`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {author.contact.email}
+            </a>
           </div>
           <div className="site-footer__links">
             <p className="eyebrow">{copy.nav.main}</p>
@@ -47,6 +54,15 @@ export default function SiteFooter({ locale }) {
           <span>{copy.footer.note}</span>
         </div>
       </div>
+
+      {/* --- ADD THIS NEW BLOCK --- */}
+      <div className="site-footer__credit">
+        <span>Website Developed and Maintained by</span>
+        <span className="site-footer__credit-name">Inam Ullah Afridi</span>
+      </div>
+      {/* -------------------------- */}
+
+
     </footer>
   );
 }

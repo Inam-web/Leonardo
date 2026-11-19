@@ -2,6 +2,7 @@ import Link from "next/link";
 import AuthorPortrait from "@/components/AuthorPortrait";
 import BookCover from "@/components/BookCover";
 import { PurchaseLink } from "@/components/PurchaseLink";
+import ScrollReveal from "@/components/ScrollReveal";
 import { author } from "@/data/author";
 import { books } from "@/data/books";
 import { getCopy } from "@/data/locales";
@@ -31,27 +32,34 @@ export default async function AboutPage({ params }) {
     <div className="about-page">
       <section className="interior-intro interior-intro--paper">
         <div className="page-shell interior-intro__inner about-intro-layout">
-          <div>
-            <p className="eyebrow">{copy.aboutPage.eyebrow}</p>
-            <h1 className="display-title interior-title">
-              <span>{copy.aboutPage.title[0]}</span>
-              <em>{copy.aboutPage.title[1]}</em>
-            </h1>
-            <p className="interior-intro__lead">{copy.aboutPage.lead}</p>
-          </div>
-          <div className="about-intro-aside">
-            <span className="about-intro-aside__mark" aria-hidden="true">LP</span>
-            <p>{author.summary[locale] || author.summary.en}</p>
-          </div>
+          <ScrollReveal>
+            <div>
+              <p className="eyebrow">{copy.aboutPage.eyebrow}</p>
+              <h1 className="display-title interior-title">
+                <span>{copy.aboutPage.title[0]}</span>
+                <em>{copy.aboutPage.title[1]}</em>
+              </h1>
+              <p className="interior-intro__lead">{copy.aboutPage.lead}</p>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={0.15}>
+            <div className="about-intro-aside">
+              <span className="about-intro-aside__mark" aria-hidden="true">LP</span>
+              <p>{author.summary[locale] || author.summary.en}</p>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       <section className="biography-section paper-texture">
         <div className="page-shell biography-layout">
-          <div className="biography-portrait">
-            <AuthorPortrait label={copy.aboutPage.portrait} path={copy.aboutPage.portraitPath} />
-          </div>
-          <div className="biography-content">
+          <ScrollReveal className="biography-portrait">
+            <AuthorPortrait
+              src={author.portraitImage}
+              alt={author.name}
+            />
+          </ScrollReveal>
+          <ScrollReveal delay={0.15} className="biography-content">
             <p className="eyebrow">{copy.aboutPage.works}</p>
             {biography.map((section, sectionIndex) => (
               <article className="bio-chapter" key={section.title}>
@@ -62,24 +70,28 @@ export default async function AboutPage({ params }) {
                 </div>
               </article>
             ))}
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
       <section className="about-book-callout">
         <div className="page-shell about-book-callout__layout">
-          <BookCover book={book} locale={locale} className="cover-figure--small" />
-          <div>
-            <p className="eyebrow eyebrow--gold">{book.series} / 01</p>
-            <h2 className="display-title section-title">{book.title}</h2>
-            <p>{book.shortDescription[locale] || book.shortDescription.en}</p>
-            <div className="featured-actions">
-              <Link className="text-link text-link--light" href={`/${locale}/books/${book.slug}`}>
-                <span>{copy.aboutPage.bookLink}</span><span className="text-link__arrow" aria-hidden="true">→</span>
-              </Link>
-              <PurchaseLink book={book} label={copy.featured.buy} className="button button--gold" />
+          <ScrollReveal>
+            <BookCover book={book} locale={locale} className="cover-figure--small" />
+          </ScrollReveal>
+          <ScrollReveal delay={0.15}>
+            <div>
+              <p className="eyebrow eyebrow--gold">{book.series} / 01</p>
+              <h2 className="display-title section-title">{book.title}</h2>
+              <p>{book.shortDescription[locale] || book.shortDescription.en}</p>
+              <div className="featured-actions">
+                <Link className="text-link text-link--light" href={`/${locale}/books/${book.slug}`}>
+                  <span>{copy.aboutPage.bookLink}</span><span className="text-link__arrow" aria-hidden="true">→</span>
+                </Link>
+                <PurchaseLink book={book} label={copy.featured.buy} className="button button--gold" />
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
     </div>
