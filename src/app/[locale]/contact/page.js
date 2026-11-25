@@ -1,6 +1,7 @@
 import { author } from "@/data/author";
 import { getCopy } from "@/data/locales";
 import ScrollReveal from "@/components/ScrollReveal";
+import ContactForm from "@/components/ContactForm";
 
 const openGraphLocales = { en: "en_US", it: "it_IT", es: "es_ES", de: "de_DE" };
 
@@ -41,17 +42,20 @@ export default async function ContactPage({ params }) {
 
       <section className="contact-details-section paper-texture">
         <div className="page-shell contact-details-layout">
-          <ScrollReveal className="contact-email-block">
-            <p className="eyebrow">{copy.contactPage.email}</p>
-            <a className="contact-email-large" href={gmailLink} target="_blank" rel="noopener noreferrer">
-              {author.contact.email}
-            </a>
-            <a className="button button--dark" href={gmailLink} target="_blank" rel="noopener noreferrer">
-              <span>{copy.contactPage.emailAction}</span>
-              <span className="button-arrow" aria-hidden="true">↗</span>
-            </a>
+          {/* LEFT SIDE: The Form */}
+          <ScrollReveal className="contact-email-block" style={{ borderBottom: "none" }}>
+            <p className="eyebrow">{copy.contactPage.emailAction || "Send a message"}</p>
+            <h2 className="display-title" style={{ fontSize: "2.5rem", marginBottom: "2rem" }}>Get in touch</h2>
+            
+            <ContactForm 
+              nameLabel="Your Name"
+              emailLabel="Your Email"
+              messageLabel="Your Message"
+              submitLabel={copy.contactPage.emailAction}
+            />
           </ScrollReveal>
 
+          {/* RIGHT SIDE: Contact Details */}
           <ScrollReveal delay={0.15} className="contact-detail-list">
             <section className="contact-detail">
               <p className="eyebrow">{copy.contactPage.phone}</p>

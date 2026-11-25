@@ -1345,6 +1345,78 @@ address {
   color: #fff3cf;
 }
 
+
+
+/* --- Contact Form --- */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 500px;
+}
+
+.contact-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-form__group label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #786d57;
+}
+
+.contact-form__group input,
+.contact-form__group textarea {
+  width: 100%;
+  padding: 12px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--ink);
+  transition: border-color 0.3s ease;
+  resize: vertical;
+}
+
+.contact-form__group input:focus,
+.contact-form__group textarea:focus {
+  outline: none;
+  border-bottom-color: var(--gold-deep);
+}
+
+.contact-form__group input:disabled,
+.contact-form__group textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.contact-form__status {
+  font-size: 13px;
+  padding: 12px;
+  border-radius: 4px;
+  margin: 0;
+}
+
+.contact-form__status.is-success {
+  color: #1a4a2b;
+  background: #e6f4ea;
+  border: 1px solid #b7e1cd;
+}
+
+.contact-form__status.is-error {
+  color: #a12b2b;
+  background: #fce8e8;
+  border: 1px solid #f5c6c6;
+}
+
+
+
+
 /* Footer */
 .site-footer {
   padding: 44px 0 19px;
