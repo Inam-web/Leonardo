@@ -1,3 +1,6 @@
-const nextConfig = {};
-
+const nextConfig = {
+  experimental: {
+    turbopackPluginRuntimeStrategy: "workerThreads",
+  },
+};
 module.exports = nextConfig;
