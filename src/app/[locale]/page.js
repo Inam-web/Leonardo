@@ -183,7 +183,6 @@ export default async function HomePage({ params }) {
               <em>{copy.contactPreview.title[1]}</em>
             </h2>
             <p>{copy.contactPreview.body}</p>
-            <a className="contact-preview-email" href={`mailto:${author.contact.email}`}>{author.contact.email}</a>
           </ScrollReveal>
           
           <ScrollReveal delay={0.15}>
