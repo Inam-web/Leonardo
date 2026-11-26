@@ -1414,6 +1414,138 @@ address {
   border: 1px solid #f5c6c6;
 }
 
+/* --- Premium Contact Form Redesign --- */
+.contact-details-section {
+  padding: 80px 0 100px;
+  background-color: var(--paper);
+}
+
+.contact-form-centered {
+  display: flex;
+  justify-content: center;
+}
+
+.contact-form-card {
+  width: 100%;
+  max-width: 720px;
+  background: var(--paper-light);
+  border: 1px solid var(--line);
+  padding: 50px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
+}
+
+.contact-form-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.contact-form-header .display-title {
+  margin-top: 10px;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  color: var(--ink);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-form__group label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+.contact-form__group input,
+.contact-form__group textarea {
+  width: 100%;
+  padding: 16px 18px;
+  background: #ffffff;
+  border: 1px solid rgba(35, 39, 31, 0.15);
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--ink);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  resize: vertical;
+}
+
+.contact-form__group input::placeholder,
+.contact-form__group textarea::placeholder {
+  color: #a39d91;
+  font-style: italic;
+}
+
+.contact-form__group input:focus,
+.contact-form__group textarea:focus {
+  outline: none;
+  border-color: var(--gold-deep);
+  box-shadow: 0 0 0 4px rgba(151, 135, 98, 0.1);
+}
+
+.contact-form__group input:disabled,
+.contact-form__group textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #f9f9f9;
+}
+
+.contact-form__submit {
+  margin-top: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.contact-form__status {
+  font-size: 13px;
+  padding: 16px;
+  text-align: center;
+  margin: 0;
+  border-radius: 4px;
+}
+
+.contact-form__status.is-success {
+  color: #1a4a2b;
+  background: #e6f4ea;
+  border: 1px solid #b7e1cd;
+}
+
+.contact-form__status.is-error {
+  color: #a12b2b;
+  background: #fce8e8;
+  border: 1px solid #f5c6c6;
+}
+
+.contact-note {
+  margin-top: 30px;
+  text-align: center;
+  color: #6e6c63;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* Mobile adjustment for the form */
+@media (max-width: 680px) {
+  .contact-form-card {
+    padding: 30px 20px;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+  .contact-form__group input,
+  .contact-form__group textarea {
+    padding: 12px 14px;
+  }
+}
+
 
 
 
