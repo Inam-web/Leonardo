@@ -22,14 +22,14 @@ export default function SiteFooter({ locale }) {
               <span className="brand__name">Leonardo Piccardi</span>
             </Link>
             <p>{copy.footer.tagline}</p>
-            <a
+            {/* <a
               className="footer-email"
               href={`https://mail.google.com/mail/?view=cm&fs=1&to=${author.contact.email}&su=Website%20Enquiry`}
               target="_blank"
               rel="noopener noreferrer"
             >
               {author.contact.email}
-            </a>
+            </a> */}
           </div>
           <div className="site-footer__links">
             <p className="eyebrow">{copy.nav.main}</p>
