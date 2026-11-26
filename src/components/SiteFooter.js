@@ -56,10 +56,10 @@ export default function SiteFooter({ locale }) {
       </div>
 
       {/* --- ADD THIS NEW BLOCK --- */}
-      <div className="site-footer__credit">
+      {/* <div className="site-footer__credit">
         <span>Website Developed and Maintained by</span>
         <span className="site-footer__credit-name">Inam Ullah Afridi</span>
-      </div>
+      </div> */}
       {/* -------------------------- */}
 
 
