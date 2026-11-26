@@ -21,8 +21,8 @@ export async function sendEmail(prevState, formData) {
   try {
     const data = await resend.emails.send({
       // Change this to contact@yourdomain.com once verified on Resend
-      from: "Leonardo Piccardi Website <onboarding@resend.dev>", 
-      to: "inama0987654321@gmail.com",
+      from: "Leonardo Piccardi <contact@authorleonardopiccardi.com>", 
+      to: "leonardopic@libero.it",
       reply_to: email,
       subject: `New Website Enquiry from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
